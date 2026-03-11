@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postori — AI Marketing Manager for Asia</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #7C3AED;
+    --purple-light: #A78BFA;
+    --purple-soft: #EDE9FE;
+    --purple-mid: #8B5CF6;
+    --accent: #F59E0B;
+    --dark: #1E1B2E;
+    --text: #374151;
+    --text-light: #6B7280;
+    --white: #FFFFFF;
+    --bg: #FDFCFF;
+    --card-bg: #F9F7FF;
+    --border: #E9E3FF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(253, 252, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--purple);
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--purple); }
+
+  .nav-cta {
+    background: var(--purple);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--purple-mid) !important;
+    transform: translateY(-1px);
+    color: white !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .blob1 {
+    width: 600px; height: 600px;
+    background: var(--purple);
+    top: -100px; left: -100px;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .blob2 {
+    width: 400px; height: 400px;
+    background: var(--accent);
+    bottom: -50px; right: -50px;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+
+  .blob3 {
+    width: 300px; height: 300px;
+    background: var(--purple-light);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float 12s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(30px, -20px); }
+    66% { transform: translate(-20px, 30px); }
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--purple-soft);
+    color: var(--purple);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    border: 1px solid #DDD6FE;
+    animation: fadeDown 0.6s ease forwards;
+  }
+
+  .badge-dot {
+    width: 7px; height: 7px;
+    background: var(--purple);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: var(--dark);
+    max-width: 900px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+
+  .hero h1 .highlight {
+    color: var(--purple);
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 6px;
+    background: var(--accent);
+    opacity: 0.4;
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  .hero p {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-light);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 44px;
+    font-weight: 400;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--purple);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.35);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary:hover {
+    background: var(--purple-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(124, 58, 237, 0.45);
+  }
+
+  .btn-secondary {
+    background: white;
+    color: var(--purple);
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--purple-light);
+    transform: translateY(-2px);
+    background: var(--purple-soft);
+  }
+
+  .platforms {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 48px;
+    color: var(--text-light);
+    font-size: 14px;
+    animation: fadeUp 0.7s ease 0.4s both;
+  }
+
+  .platform-icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .platform-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .platform-pill .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  .yt { background: #FF0000; }
+  .ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .tt { background: #000000; }
+
+  /* DASHBOARD MOCKUP */
+  .mockup-section {
+    padding: 40px 24px 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dashboard-mockup {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 100px rgba(124, 58, 237, 0.12), 0 8px 30px rgba(0,0,0,0.06);
+    max-width: 900px;
+    width: 100%;
+    overflow: hidden;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+
+  .mockup-header {
+    background: var(--dark);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mockup-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+
+  .mockup-body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: 340px;
+  }
+
+  .mockup-sidebar {
+    background: #F8F6FF;
+    padding: 20px;
+    border-right: 1px solid var(--border);
+  }
+
+  .sidebar-logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    color: var(--purple);
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .sidebar-item.active {
+    background: var(--purple);
+    color: white;
+  }
+
+  .sidebar-item:hover:not(.active) {
+    background: var(--purple-soft);
+    color: var(--purple);
+  }
+
+  .sidebar-icon { font-size: 16px; }
+
+  .mockup-main {
+    padding: 24px;
+  }
+
+  .mockup-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .stat-value {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dark);
+  }
+
+  .stat-change {
+    font-size: 11px;
+    color: #10B981;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 80px;
+    margin-top: 8px;
+  }
+
+  .bar {
+    flex: 1;
+    background: var(--purple-soft);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .bar:hover { background: var(--purple-light); }
+  .bar.active { background: var(--purple); }
+
+  .scheduled-posts {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .post-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-item:last-child { border-bottom: none; }
+
+  .post-platform {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: white;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .post-info { flex: 1; }
+
+  .post-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+
+  .post-time {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  .post-status {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .status-scheduled {
+    background: #EDE9FE;
+    color: var(--purple);
+  }
+
+  .status-live {
+    background: #D1FAE5;
+    color: #059669;
+  }
+
+  /* FEATURES */
+  .features {
+    padding: 100px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--purple-soft);
+    color: var(--purple);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    color: var(--dark);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+
+  .section-sub {
+    font-size: 18px;
+    color: var(--text-light);
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 60px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-light));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(124, 58, 237, 0.12);
+    border-color: var(--purple-light);
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 52px; height: 52px;
+    background: var(--purple-soft);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .feature-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .feature-desc {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.65;
+  }
+
+  /* PRICING */
+  .pricing {
+    padding: 100px 24px;
+    background: var(--dark);
+    text-align: center;
+  }
+
+  .pricing .section-tag {
+    background: rgba(167, 139, 250, 0.15);
+    color: var(--purple-light);
+  }
+
+  .pricing .section-title { color: white; margin: 0 auto 16px; }
+  .pricing .section-sub { color: #9CA3AF; margin: 0 auto 60px; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .pricing-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 40px 32px;
+    text-align: left;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .pricing-card.featured {
+    background: var(--purple);
+    border-color: var(--purple-light);
+    transform: scale(1.02);
+  }
+
+  .pricing-card:hover:not(.featured) {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-4px);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--dark);
+    padding: 4px 18px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .plan-desc {
+    font-size: 14px;
+    color: #9CA3AF;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .pricing-card.featured .plan-desc { color: #DDD6FE; }
+
+  .plan-price {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .plan-period {
+    font-size: 14px;
+    color: #9CA3AF;
+    margin-bottom: 32px;
+  }
+
+  .pricing-card.featured .plan-period { color: #DDD6FE; }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #D1D5DB;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .pricing-card.featured .plan-features li { color: #EDE9FE; border-color: rgba(255,255,255,0.15); }
+  .plan-features li:last-child { border-bottom: none; }
+
+  .check { color: #A78BFA; font-weight: 700; }
+  .pricing-card.featured .check { color: #FCD34D; }
+
+  .btn-plan {
+    width: 100%;
+    padding: 14px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-plan-outline {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.2);
+    color: white;
+  }
+
+  .btn-plan-outline:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--purple-light);
+  }
+
+  .btn-plan-filled {
+    background: white;
+    color: var(--purple);
+  }
+
+  .btn-plan-filled:hover {
+    background: #EDE9FE;
+    transform: translateY(-2px);
+  }
+
+  /* WAITLIST */
+  .waitlist {
+    padding: 100px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .waitlist-blob {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: var(--purple);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.07;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .waitlist .section-title { margin: 0 auto 16px; }
+  .waitlist .section-sub { margin: 0 auto 44px; }
+
+  .waitlist-form {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .waitlist-input {
+    flex: 1;
+    min-width: 240px;
+    padding: 16px 24px;
+    border: 2px solid var(--border);
+    border-radius: 100px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    background: white;
+    color: var(--dark);
+    transition: border-color 0.2s;
+  }
+
+  .waitlist-input:focus { border-color: var(--purple); }
+  .waitlist-input::placeholder { color: #C4B5FD; }
+
+  .waitlist-note {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  .social-proof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .avatars {
+    display: flex;
+  }
+
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-left: -10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+  }
+
+  .avatar:first-child { margin-left: 0; }
+
+  .social-text {
+    font-size: 14px;
+    color: var(--text-light);
+  }
+
+  .social-text strong { color: var(--purple); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 40px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--purple-light);
+    margin-bottom: 12px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: #6B7280;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* DEMO MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 27, 46, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .modal h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+
+  .modal p {
+    color: var(--text-light);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .modal-input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .modal-input:focus { border-color: var(--purple); }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-light);
+  }
+
+  .modal { position: relative; }
+
+  .success-message {
+    display: none;
+    background: #D1FAE5;
+    color: #065F46;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">post<span>ori</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#waitlist">Early Access</a></li>
+    <li><a href="#waitlist" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-blob blob3"></div>
+
+  <div class="badge">
+    <div class="badge-dot"></div>
+    AI Marketing Manager for Asia
+  </div>
+
+  <h1>Manage every platform.<br><span class="highlight">One dashboard.</span></h1>
+
+  <p>Postori connects YouTube, Instagram, and TikTok into a single smart workspace — built for Korean agencies and creators who are tired of juggling three apps.</p>
+
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="openModal()">Join the Waitlist</button>
+    <a href="#features" class="btn-secondary">See Features</a>
+  </div>
+
+  <div class="platforms">
+    <span>Works with</span>
+    <div class="platform-icons">
+      <div class="platform-pill"><div class="dot yt"></div> YouTube</div>
+      <div class="platform-pill"><div class="dot ig"></div> Instagram</div>
+      <div class="platform-pill"><div class="dot tt"></div> TikTok</div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD MOCKUP -->
+<section class="mockup-section">
+  <div class="dashboard-mockup">
+    <div class="mockup-header">
+      <div class="mockup-dot" style="background:#FF5F57"></div>
+      <div class="mockup-dot" style="background:#FFBD2E"></div>
+      <div class="mockup-dot" style="background:#28C840"></div>
+    </div>
+    <div class="mockup-body">
+      <div class="mockup-sidebar">
+        <div class="sidebar-logo">postori</div>
+        <div class="sidebar-item active"><span class="sidebar-icon">📊</span> Dashboard</div>
+        <div class="sidebar-item"><span class="sidebar-icon">📅</span> Schedule</div>
+        <div class="sidebar-item"><span class="sidebar-icon">💬</span> Inbox</div>
+        <div class="sidebar-item"><span class="sidebar-icon">📈</span> Analytics</div>
+        <div class="sidebar-item"><span class="sidebar-icon">🤖</span> AI Assistant</div>
+        <div class="sidebar-item"><span class="sidebar-icon">📋</span> Reports</div>
+        <div class="sidebar-item"><span class="sidebar-icon">👥</span> Clients</div>
+      </div>
+      <div class="mockup-main">
+        <div class="mockup-title">Overview — This Week</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label"><div class="dot yt" style="width:8px;height:8px;border-radius:50%;display:inline-block"></div> YouTube</div>
+            <div class="stat-value">48.2K</div>
+            <div class="stat-change">↑ 12.4% this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label"><div class="dot ig" style="width:8px;height:8px;border-radius:50%;display:inline-block"></div> Instagram</div>
+            <div class="stat-value">23.7K</div>
+            <div class="stat-change">↑ 8.1% this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label"><div class="dot tt" style="width:8px;height:8px;border-radius:50%;display:inline-block"></div> TikTok</div>
+            <div class="stat-value">91.5K</div>
+            <div class="stat-change">↑ 31.2% this week</div>
+          </div>
+        </div>
+        <div class="chart-bars">
+          <div class="bar" style="height:40%"></div>
+          <div class="bar" style="height:60%"></div>
+          <div class="bar" style="height:45%"></div>
+          <div class="bar active" style="height:80%"></div>
+          <div class="bar" style="height:65%"></div>
+          <div class="bar" style="height:55%"></div>
+          <div class="bar" style="height:90%"></div>
+        </div>
+        <div class="scheduled-posts" style="margin-top:16px">
+          <div class="post-item">
+            <div class="post-platform" style="background:#FF0000">YT</div>
+            <div class="post-info">
+              <div class="post-title">Behind the Scenes — Studio Tour</div>
+              <div class="post-time">Today, 6:00 PM KST</div>
+            </div>
+            <div class="post-status status-live">● Live</div>
+          </div>
+          <div class="post-item">
+            <div class="post-platform" style="background:linear-gradient(135deg,#f09433,#dc2743,#bc1888)">IG</div>
+            <div class="post-info">
+              <div class="post-title">New collection drop 🔥</div>
+              <div class="post-time">Tomorrow, 9:00 AM KST</div>
+            </div>
+            <div class="post-status status-scheduled">Scheduled</div>
+          </div>
+          <div class="post-item">
+            <div class="post-platform" style="background:#000">TT</div>
+            <div class="post-info">
+              <div class="post-title">Trending sound remix challenge</div>
+              <div class="post-time">Tomorrow, 12:00 PM KST</div>
+            </div>
+            <div class="post-status status-scheduled">Scheduled</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-tag">✦ What Postori Does</div>
+  <h2 class="section-title">Everything your agency needs. Nothing it doesn't.</h2>
+  <p class="section-sub">Built specifically for Korean agencies and creators — not a global tool retrofitted for Korea.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Unified Dashboard</div>
+      <div class="feature-desc">Connect YouTube, Instagram, and TikTok in one login. Switch between client accounts instantly. Stop juggling three apps.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <div class="feature-title">Cross-Platform Scheduling</div>
+      <div class="feature-desc">Write once, schedule everywhere. Set date, time, and platform formatting in one workflow. Posts go out automatically.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">Unified Comment Inbox</div>
+      <div class="feature-desc">All comments from all platforms in one feed. Reply directly from Postori without switching apps. Never miss a comment again.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <div class="feature-title">Cross-Platform Analytics</div>
+      <div class="feature-desc">Follower growth, engagement rate, reach, and best performing content — all in one clean view across every platform.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">AI Marketing Assistant</div>
+      <div class="feature-desc">Ask Postori "what should I post tomorrow?" and get a data-driven answer. AI captions, hashtags, and posting times optimised for Korean audiences.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎬</div>
+      <div class="feature-title">Content Repurposing</div>
+      <div class="feature-desc">Upload one video and AI reformats it for YouTube long-form, TikTok vertical, and Instagram Reel simultaneously. Hours of work in seconds.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <div class="feature-title">One-Click Client Reports</div>
+      <div class="feature-desc">Generate branded performance reports for each client in one click. No more manual PowerPoint decks every month.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔥</div>
+      <div class="feature-title">AI Trend Insights</div>
+      <div class="feature-desc">Real-time trending topics, hashtags, and viral content in Korea and Asia. Know what to post before your competitors do.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <div class="feature-title">Team Approval Workflow</div>
+      <div class="feature-desc">Draft, review, and approve content before it goes live. Agencies can manage junior staff output without losing control.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-tag">✦ Simple Pricing</div>
+  <h2 class="section-title">Start free. Grow with Postori.</h2>
+  <p class="section-sub">No hidden fees. No surprises. Cancel anytime.</p>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Creator</div>
+      <div class="plan-desc">For individual creators managing their own accounts.</div>
+      <div class="plan-price">₩29,000</div>
+      <div class="plan-period">per month</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> 3 social accounts</li>
+        <li><span class="check">✓</span> Unified scheduling</li>
+        <li><span class="check">✓</span> Basic analytics</li>
+        <li><span class="check">✓</span> Comment inbox</li>
+        <li><span class="check">✓</span> AI captions</li>
+      </ul>
+      <button class="btn-plan btn-plan-outline" onclick="openModal()">Join Waitlist</button>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="plan-name">Agency</div>
+      <div class="plan-desc">For agencies managing multiple client accounts daily.</div>
+      <div class="plan-price">₩150,000</div>
+      <div class="plan-period">per month</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Unlimited client accounts</li>
+        <li><span class="check">✓</span> Full AI marketing assistant</li>
+        <li><span class="check">✓</span> Team approval workflow</li>
+        <li><span class="check">✓</span> One-click client reports</li>
+        <li><span class="check">✓</span> Content repurposing AI</li>
+        <li><span class="check">✓</span> Priority Korean support</li>
+      </ul>
+      <button class="btn-plan btn-plan-filled" onclick="openModal()">Join Waitlist</button>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-blob"></div>
+  <div class="section-tag">✦ Early Access</div>
+  <h2 class="section-title">Be first in Korea.</h2>
+  <p class="section-sub">Join the waitlist and get free beta access when we launch. Limited spots for agencies.</p>
+
+  <div class="waitlist-form">
+    <input type="email" class="waitlist-input" placeholder="your@email.com" id="heroEmail">
+    <button class="btn-primary" onclick="handleWaitlist()">Get Early Access</button>
+  </div>
+  <div class="waitlist-note">🔒 No spam. Beta access only. Unsubscribe anytime.</div>
+
+  <div class="social-proof">
+    <div class="avatars">
+      <div class="avatar" style="background:#7C3AED">김</div>
+      <div class="avatar" style="background:#8B5CF6">이</div>
+      <div class="avatar" style="background:#A78BFA">박</div>
+      <div class="avatar" style="background:#6D28D9">최</div>
+    </div>
+    <div class="social-text">Join <strong>agencies already on the waitlist</strong></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">postori</div>
+  <div class="footer-text">© 2025 Postori. Built for Korea. Built for Asia. · buildmode.io@gmail.com</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div style="font-size:40px;margin-bottom:16px">🎉</div>
+    <h3>Get Early Access</h3>
+    <p>Join the Postori waitlist. Beta users get 3 months free when we launch.</p>
+    <input type="text" class="modal-input" placeholder="Your name" id="modalName">
+    <input type="email" class="modal-input" placeholder="your@email.com" id="modalEmail">
+    <input type="text" class="modal-input" placeholder="Agency name (optional)" id="modalAgency">
+    <button class="btn-primary" style="width:100%;padding:16px" onclick="submitWaitlist()">Secure My Spot</button>
+    <div class="success-message" id="successMsg">✅ You're on the list! We'll be in touch soon.</div>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  function submitWaitlist() {
+    const name = document.getElementById('modalName').value;
+    const email = document.getElementById('modalEmail').value;
+    if (!email) { alert('Please enter your email.'); return; }
+    document.getElementById('successMsg').style.display = 'block';
+    setTimeout(closeModal, 2500);
+  }
+
+  function handleWaitlist() {
+    const email = document.getElementById('heroEmail').value;
+    if (email) {
+      document.getElementById('modalEmail').value = email;
+    }
+    openModal();
+  }
+
+  // Smooth scroll nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Animate feature cards on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.6s ease forwards';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card').forEach(card => {
+    card.style.opacity = '0';
+    observer.observe(card);
+  });
+</script>
+</body>
+</html>
